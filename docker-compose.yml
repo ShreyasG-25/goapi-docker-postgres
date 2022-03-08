@@ -1,0 +1,41 @@
+version: "3.8"
+
+services:
+  database:
+    container_name: postgres4
+    image: postgres:14.2-alpine
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=@@1Shreyas1@@
+      - POSTGRES_DB=example3
+    ports:
+      - "5431:5432"
+    networks:
+      - fullstack     
+    volumes:
+      - db:/var/lib/postgresql/data 
+
+  web:
+    build: .
+    container_name: web4
+    environment:
+      DB_USERNAME: "postgres"
+      DB_PASSWORD: "@@1Shreyas1@@"
+      DB_DB: "example3"
+      DB_HOST: database
+      DB_TABLE: "Suppliers"
+      DB_PORT: 5432
+      
+    depends_on:
+      - database
+    networks:
+      - fullstack
+    ports: 
+      - "4000:4000"
+
+volumes:
+  db:
+
+networks:
+  fullstack:
+    driver: bridge
