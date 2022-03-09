@@ -326,7 +326,6 @@ func viewProductDetails(w http.ResponseWriter, r *http.Request) {
     json.NewEncoder(w).Encode(ProdCats)
 }
 
-
 //view products
 func viewProd(w http.ResponseWriter, r *http.Request) {
 	//db := setupDB()
@@ -438,7 +437,7 @@ func main() {
 	r.HandleFunc("/product/details", viewProductDetails).Methods("GET")
 	//localhost:4000\products?page=2
 	//List all with pagination
-	r.HandleFunc("/product", viewProd).Methods("GET")
+	r.HandleFunc("/products", viewProd).Methods("GET")
 	//localhost:4000\products\category?category_id=2
 	//List by category and pagination
 	r.HandleFunc("/product/category", viewProdByCategory).Methods("GET")
